@@ -1,4 +1,5 @@
 
+import sys
 import cv2
 import numpy as np
 import pandas as pd
@@ -21,7 +22,7 @@ class Main :
             model="{}/{}.xml".format(pd_model_path, pd_model_name),
             weights="{}/{}.bin".format(pd_model_path, pd_model_name)
         )
-        self.pd_executor = self.ie.load_network (self.pd_net, "GPU")
+        self.pd_executor = self.ie.load_network (self.pd_net, sys.argv[1])
         self.PERSON_DETECTION_TRESHOLD_CONFIDENCE = 0.9
 
         self.input_info_pd = next(iter(self.pd_executor.input_info))
@@ -29,7 +30,10 @@ class Main :
 
         print ("\n====================\nAll networks loaded!\n====================\n")
 
-        self.camera = cv2.VideoCapture("/dev/video0")
+        source_stream = "/dev/video0"
+        if len(sys.argv) == 3 :
+            source_stream = sys.argv[2]
+        self.camera = cv2.VideoCapture(source_stream)
 
         cv2.namedWindow("Display", cv2.WINDOW_AUTOSIZE)
 
@@ -97,5 +101,12 @@ class Main :
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2 :
+        print ("\nWrong arguments number!\n\t\t\tUsage:\tpython main.py <device> [source stream]\n\n")
+        raise
+    if sys.argv[1] != "CPU" and sys.argv[1] != "CPU":
+        print ("\nDevice on which execute inference must be 'CPU' or 'GPU'\n\n")
+        raise
+
     main    = Main()
     main.run()

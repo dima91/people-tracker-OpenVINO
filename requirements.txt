@@ -1,3 +1,5 @@
 numpy==1.23.2
 pandas==1.4.4
 configparser==5.3.0
+opencv-python==4.6.0.66
+openvino-dev==2021.4.2

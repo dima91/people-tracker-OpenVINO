@@ -31,7 +31,13 @@ docker run --rm -it --privileged --net=host -v /tmp/.X11-unix:/tmp/.X11-unix \
             dockerdima/clea_ai_base
 ```
 
-go to `cd ws/people-tracker-OpenVINO/` folder and execute the script with `python main.py GPU`.
+and type
+
+```
+cd ws/people-tracker-OpenVINO/
+source venv/bin/activate
+python main.py GPU
+```
 
 In case of problems related to X11 server, type  
 `xhost +`  

@@ -104,7 +104,7 @@ if __name__ == '__main__':
     if len(sys.argv) < 2 :
         print ("\nWrong arguments number!\n\t\t\tUsage:\tpython main.py <device> [source stream]\n\n")
         raise
-    if sys.argv[1] != "CPU" and sys.argv[1] != "CPU":
+    if sys.argv[1] != "CPU" and sys.argv[1] != "GPU":
         print ("\nDevice on which execute inference must be 'CPU' or 'GPU'\n\n")
         raise
 
